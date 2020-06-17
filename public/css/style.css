@@ -21,15 +21,21 @@ footer a:hover {
     color: #FFF;
 }
 
-.btn.btn-primary {
-    background-color: #E12D0E; border-color:  #E12D0E;
+.btn {
+    background-color: #E12D0E;
+    border: 1px solid #E12D0E;
+    color: #FFF;
+    padding: 4px 6px;
+    border-radius: 4px;
 }
 
-.btn.btn-primary:hover {
-    background-color: #FFF; border-color: #E12D0E; color: #E12D0E;
+.btn:hover {
+    background-color: #FFF;
+    border-color: #E12D0E;
+    color: #E12D0E;
 }
 
-header .btn.btn-primary,
+header .btn,
 header .form-group {
     margin-right: 5px;
 }
