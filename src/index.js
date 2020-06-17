@@ -19,7 +19,7 @@ class App extends React.Component {
 
   async getAverageStar() {
     try {
-      let response = await fetch('http://localhost:80/api/v1/tools/average_star');
+      let response = await fetch('https://phplaravel-382225-1341568.cloudwaysapps.com/api/v1/tools/average_star');
       console.log(response);
       // let responseJson = await response.json();
       // console.log('test2: '+responseJson);
