@@ -14,6 +14,7 @@ class App extends React.Component {
       average_star: 0,
       count_star: 0,
       vote: '',
+      ip: '',
       url: '',
       auth_username: '',
       auth_password: ''
@@ -136,6 +137,7 @@ class App extends React.Component {
                                 <aside className="col-sm-3">
                                     <span>Do you like what are you seeing? Give me a feedback</span>
                                     <form className="vote" onSubmit={this.starSubmit}>
+                                        <input type="hidden" name="ip" />
                                         <div className="radio"><label><input type="radio" name="vote" value="1" onChange={this.onChange} required /> 1 star (crappy)</label></div>
                                         <div className="radio"><label><input type="radio" name="vote" value="2" onChange={this.onChange} /> 2 star (indecent)</label></div>
                                         <div className="radio"><label><input type="radio" name="vote" value="3" onChange={this.onChange} /> 3 star (medium)</label></div>
@@ -160,7 +162,7 @@ class App extends React.Component {
               <div className="col-sm-4 text-right">
                 <div itemProp="aggregateRating" itemScope itemType="http://schema.org/AggregateRating">
                   <meta itemProp="bestRating" content="5" />
-                  {this.state.average_star === 0 && <span className="loading">*</span>}<span itemProp="ratingValue">{this.state.average_star}</span><span>/5 stars from</span> {this.state.count_star === 0 && <span className="loading">*</span>}<span itemProp="reviewCount">{this.state.count_star}</span> feedbacks
+                  {this.state.average_star === '' && <span className="loading">*</span>}<span itemProp="ratingValue">{this.state.average_star}</span><span>/5 stars from</span> {this.state.count_star === '' && <span className="loading">*</span>}<span itemProp="reviewCount">{this.state.count_star}</span> feedbacks
                 </div>
               </div>
             </div>
