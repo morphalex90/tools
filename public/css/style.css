@@ -1,0 +1,105 @@
+body  {
+    font-size: 13px;
+}
+
+body h1 {
+    font-weight: bold;
+}
+
+footer {
+    background: #E12D0E;
+    margin-top: 20px;
+    padding: 20px;
+    color: #FFF;
+}
+
+footer a {
+    color: #FFF;
+}
+
+footer a:hover {
+    color: #FFF;
+}
+
+.btn.btn-primary {
+    background-color: #E12D0E; border-color:  #E12D0E;
+}
+
+.btn.btn-primary:hover {
+    background-color: #FFF; border-color: #E12D0E; color: #E12D0E;
+}
+
+header .btn.btn-primary,
+header .form-group {
+    margin-right: 5px;
+}
+
+.content {
+    padding: 20px 0;
+}
+
+.inspect .search-url {
+    width: calc( 100% - 250px )
+}
+
+.inspect input {
+    width: 100% !important;
+}
+
+.visually-hidden {
+    position: absolute !important;
+    overflow: hidden;
+    height: 1px;
+    width: 1px;
+    word-wrap: normal;
+}
+
+.relnofollow {
+    background: #CCC !important;
+}
+
+.notitle {
+    background: #ff9900 !important;
+}
+
+.noalt {
+    background: #ff9900 !important;
+}
+
+label {
+    cursor: pointer;
+}
+
+.nav-tabs .link-error {
+    color: #F00;
+}
+
+.overlay {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+    background: #FFF;
+}
+
+.overlay:after {
+    background: url(/social.png);
+    position: absolute;
+    content: ' ';
+    display: block;
+    height: 200px;
+    width: 200px;
+    background-size: contain;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+@media only screen and (max-width:768px){
+    .inspect .form-group {
+        width: 100% !important;
+        margin-bottom: 5px;
+    }
+}
