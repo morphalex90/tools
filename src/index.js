@@ -11,8 +11,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      average_star: '',
-      count_star: '',
+      average_star: 0,
+      count_star: 0,
       vote: '',
       url: '',
       auth_username: '',
@@ -50,10 +50,6 @@ class App extends React.Component {
     e.preventDefault();
     const { url, auth_username, auth_password } = this.state;
     console.log(url + auth_username + auth_password);
-
-    // axios.post('/', { star })
-    //   .then((result) => {
-    //   });
   }
 
   render() {
@@ -164,7 +160,7 @@ class App extends React.Component {
               <div className="col-sm-4 text-right">
                 <div itemProp="aggregateRating" itemScope itemType="http://schema.org/AggregateRating">
                   <meta itemProp="bestRating" content="5" />
-                  {this.state.average_star.length === 0 && <span className="loading">*</span>}<span itemProp="ratingValue">{this.state.average_star}</span><span>/5 stars from</span> {this.state.count_star.length === 0 && <span className="loading">*</span>}<span itemProp="reviewCount">{this.state.count_star}</span> feedbacks
+                  {this.state.average_star === 0 && <span className="loading">*</span>}<span itemProp="ratingValue">{this.state.average_star}</span><span>/5 stars from</span> {this.state.count_star === 0 && <span className="loading">*</span>}<span itemProp="reviewCount">{this.state.count_star}</span> feedbacks
                 </div>
               </div>
             </div>
