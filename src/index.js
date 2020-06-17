@@ -159,7 +159,7 @@ class App extends React.Component {
         <footer>
           <div className="container">
             <div className="row">
-              <div className="col-sm-8">Idea &amp; code by <a href="https://www.pieronanni.com" target="_blank" title="Visit me!" rel="noopener noreferrer">Piero Nanni</a>, completely rebuilt during Hack Days at <a href="https://purrgroup.com" target="_blank" title="Purr Digital">Purr Digital</a></div>
+              <div className="col-sm-8">Idea &amp; code by <a href="https://www.pieronanni.com" target="_blank" title="Visit me!" rel="noopener noreferrer">Piero Nanni</a>, completely rebuilt during Hack Days at <a href="https://purrgroup.com" title="Purr Digital">Purr Digital</a></div>
               <div className="col-sm-4 text-right">
                 <div itemProp="aggregateRating" itemScope itemType="http://schema.org/AggregateRating">
                   <meta itemProp="bestRating" content="5" />
