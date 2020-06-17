@@ -44,6 +44,7 @@ class App extends React.Component {
     this.getAverageStar(); // sync stars in footer
     const data = new FormData(e.target);
     let response = fetch(API_URL+'/api/v1/tools/star', { method: 'post', body: data})
+    console.log(response);
     this.getAverageStar(); // sync stars in footer
   }
 
