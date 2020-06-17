@@ -4,8 +4,8 @@ import './index.css';
 // import logo from './logo.svg';
 import * as serviceWorker from './serviceWorker';
 
-// const CORS_PROXY = 'https://cors-anywhere.herokuapp.com/';
-// let url = 'https://api.redtube.com/?data=redtube.Videos.searchVideos&output=json&thumbsize=big&ordering=newest';
+const API_URL = 'https://phplaravel-382225-1341568.cloudwaysapps.com';
+// const API_URL = 'http://api.local';
 
 class App extends React.Component {
   constructor(props) {
@@ -13,11 +13,7 @@ class App extends React.Component {
     this.state = {
       average_star: '',
       count_star: '',
-      star_1: '',
-      star_2: '',
-      star_3: '',
-      star_4: '',
-      star_5: '',
+      vote: '',
       url: '',
       auth_username: '',
       auth_password: ''
@@ -30,8 +26,7 @@ class App extends React.Component {
 
   async getAverageStar() {
     try {
-      let response = await fetch('https://phplaravel-382225-1341568.cloudwaysapps.com/api/v1/tools/average_star');
-      // let response = await fetch('http://api.local/api/v1/tools/average_star');
+      let response = await fetch(API_URL+'/api/v1/tools/average_star');
       let responseJson = await response.json();
       this.setState({ average_star: responseJson.average, count_star: responseJson.count });
      } catch(error) {
@@ -45,18 +40,14 @@ class App extends React.Component {
 
   starSubmit = (e) => {
     e.preventDefault();
-    // get our form data out of state
-    const { star } = this.state;
-    console.log(star);
-
-    // axios.post('/', { star })
-    //   .then((result) => {
-    //   });
+    this.getAverageStar(); // sync stars in footer
+    const data = new FormData(e.target);
+    let response = fetch(API_URL+'/api/v1/tools/star', { method: 'post', body: data})
+    this.getAverageStar(); // sync stars in footer
   }
 
   siteSubmit = (e) => {
     e.preventDefault();
-    // get our form data out of state
     const { url, auth_username, auth_password } = this.state;
     console.log(url + auth_username + auth_password);
 
@@ -67,7 +58,6 @@ class App extends React.Component {
 
   render() {
     // document.title = 'Tools - Morpheus90' ; 
-    // document.getElementsByTagName("META")[2].content="Your description about the page or site here to set dynamically";
     const { url, auth_username, auth_password } = this.state;
 
     return (
@@ -138,7 +128,7 @@ class App extends React.Component {
                             {/* @endif */}
                         </div>
 
-                    <a href="#" id="main-content" title="Main Content">Main Contant</a>
+                    {/* <a href="#" id="main-content" title="Main Content">Main Contant</a> */}
 
                         <div className="content">
                             <div className="row">
@@ -150,11 +140,11 @@ class App extends React.Component {
                                 <aside className="col-sm-3">
                                     <span>Do you like what are you seeing? Give me a feedback</span>
                                     <form className="vote" onSubmit={this.starSubmit}>
-                                        <div className="radio"><label><input type="radio" name="star" value="1" onChange={this.onChange} required /> 1 star (crappy)</label></div>
-                                        <div className="radio"><label><input type="radio" name="star" value="2" onChange={this.onChange} /> 2 star (indecent)</label></div>
-                                        <div className="radio"><label><input type="radio" name="star" value="3" onChange={this.onChange} /> 3 star (medium)</label></div>
-                                        <div className="radio"><label><input type="radio" name="star" value="4" onChange={this.onChange} /> 4 star (not bad)</label></div>
-                                        <div className="radio"><label><input type="radio" name="star" value="5" onChange={this.onChange} /> 5 star (superbe)</label></div>
+                                        <div className="radio"><label><input type="radio" name="vote" value="1" onChange={this.onChange} required /> 1 star (crappy)</label></div>
+                                        <div className="radio"><label><input type="radio" name="vote" value="2" onChange={this.onChange} /> 2 star (indecent)</label></div>
+                                        <div className="radio"><label><input type="radio" name="vote" value="3" onChange={this.onChange} /> 3 star (medium)</label></div>
+                                        <div className="radio"><label><input type="radio" name="vote" value="4" onChange={this.onChange} /> 4 star (not bad)</label></div>
+                                        <div className="radio"><label><input type="radio" name="vote" value="5" onChange={this.onChange} /> 5 star (superbe)</label></div>
                                         <button type="submit" className="btn">Submit</button>
                                         <div className="response"></div>
                                     </form>
