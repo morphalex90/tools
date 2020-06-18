@@ -17,7 +17,8 @@ class App extends React.Component {
       ip: '',
       url: '',
       auth_username: '',
-      auth_password: ''
+      auth_password: '',
+      search: 0,
     };
   }
 
@@ -41,17 +42,72 @@ class App extends React.Component {
 
   starSubmit = (e) => {
     e.preventDefault();
-    this.getAverageStar(); // sync stars in footer
     const data = new FormData(e.target);
-    let response = fetch(API_URL+'/api/v1/tools/star', { method: 'post', body: data})
-    console.log(response);
-    this.getAverageStar(); // sync stars in footer
+    fetch(API_URL+'/api/v1/tools/star', { method: 'post', body: data}).then(response => this.getAverageStar() );
   }
 
   siteSubmit = (e) => {
     e.preventDefault();
-    const { url, auth_username, auth_password } = this.state;
-    console.log(url + auth_username + auth_password);
+    const data = new FormData(e.target);
+    fetch(API_URL+'/api/v1/tools/step_link', { method: 'post', body: data})
+    .then(response => response.json())
+    .then(response => this.setState({ count_link: response.count, step_link: response.response, search: 1 }) )
+    .then(response => this.stepImage(data) );
+  }
+
+  stepImage(data) {
+    fetch(API_URL+'/api/v1/tools/step_image', { method: 'post', body: data})
+    .then(response => response.json())
+    .then(response => this.setState({ count_image: response.count, step_image: response.response }) )
+    .then(response => this.stepHeading(data) );
+  }
+
+  stepHeading(data) {
+    fetch(API_URL+'/api/v1/tools/step_heading', { method: 'post', body: data})
+    .then(response => response.json())
+    .then(response => this.setState({ count_heading: response.count, step_heading: response.response }) )
+    .then(response => this.stepMeta(data) );
+  }
+
+  stepMeta(data) {
+    fetch(API_URL+'/api/v1/tools/step_meta', { method: 'post', body: data})
+    .then(response => response.json())
+    .then(response => this.setState({ count_meta: response.count, step_meta: response.response }) )
+    .then(response => this.stepRobots(data) );
+  }
+
+  stepRobots(data) {
+    fetch(API_URL+'/api/v1/tools/step_robots', { method: 'post', body: data})
+    .then(response => response.json())
+    .then(response => this.setState({ count_robots: response.count, step_robots: response.response }) )
+    .then(response => this.stepSitemap(data) );
+  }
+
+  stepSitemap(data) {
+    fetch(API_URL+'/api/v1/tools/step_sitemap', { method: 'post', body: data})
+    .then(response => response.json())
+    .then(response => this.setState({ count_sitemap: response.count, step_sitemap: response.response }) )
+    .then(response => this.stepOthers(data) );
+  }
+
+  stepOthers(data) {
+    fetch(API_URL+'/api/v1/tools/step_others', { method: 'post', body: data})
+    .then(response => response.json())
+    .then(response => this.setState({ count_others: response.count, step_others: response.response }) )
+    .then(response => this.stepStructuredData(data) );
+  }
+
+  stepStructuredData(data) {
+    fetch(API_URL+'/api/v1/tools/step_structured_data', { method: 'post', body: data})
+    .then(response => response.json())
+    .then(response => this.setState({ count_structured_data: response.count, step_structured_data: response.response }) )
+    .then(response => this.stepErrors(data) );
+  }
+
+  stepErrors(data) {
+    fetch(API_URL+'/api/v1/tools/step_errors', { method: 'post', body: data})
+    .then(response => response.json())
+    .then(response => this.setState({ count_errors: response.count, step_errors: response.response }) );
   }
 
   render() {
@@ -98,59 +154,56 @@ class App extends React.Component {
                       </form>
                     </header>
                     
-                        <ul className="nav nav-tabs" id="sections" role="tablist">
-                            <li className="nav-item"><a className="nav-link active" id="link-tab" data-toggle="tab" href="#link" role="tab" aria-controls="link" aria-selected="true">Link (0)</a></li>
-                            <li className="nav-item"><a className="nav-link" id="img-tab" data-toggle="tab" href="#img" role="tab" aria-controls="img" aria-selected="false">Images (0)</a></li>
-                            <li className="nav-item"><a className="nav-link" id="headings-tab" data-toggle="tab" href="#headings" role="tab" aria-controls="headings" aria-selected="false">Headings (0)</a></li>
-                            <li className="nav-item"><a className="nav-link" id="meta-tab" data-toggle="tab" href="#meta" role="tab" aria-controls="meta" aria-selected="false">Meta (0)</a></li>
-                            <li className="nav-item"><a className="nav-link" id="robots-tab" data-toggle="tab" href="#robots" role="tab" aria-controls="robots" aria-selected="false">Robots</a></li>
-                            <li className="nav-item"><a className="nav-link" id="sitemap-tab" data-toggle="tab" href="#sitemap" role="tab" aria-controls="sitemap" aria-selected="false">Sitemap</a></li>
-                            <li className="nav-item"><a className="nav-link" id="others-tab" data-toggle="tab" href="#others" role="tab" aria-controls="others" aria-selected="false">Others (0)</a></li>
-                            <li className="nav-item"><a className="nav-link" id="structured_data-tab" data-toggle="tab" href="#structured_data" role="tab" aria-controls="structured_data" aria-selected="false">Structured Data (0)</a></li>
-                            
-                              <li className="nav-item"><a className="nav-link link-error" id="errors-tab" data-toggle="tab" href="#errors" role="tab" aria-controls="errors" aria-selected="false">Errors (0)</a></li>
-                            
-                        </ul>
+                    {this.state.search === 1 && <div>
+                      <ul className="nav">
+                        <li><a className="nav-link active" id="link-tab" href="#link">Link ({this.state.count_link})</a></li>
+                        <li><a className="nav-link" href="#img">Images ({this.state.count_image})</a></li>
+                        <li><a className="nav-link" href="#headings">Headings ({this.state.count_heading})</a></li>
+                        <li><a className="nav-link" href="#meta">Meta ({this.state.count_meta})</a></li>
+                        <li><a className="nav-link" href="#robots">Robots</a></li>
+                        <li><a className="nav-link" href="#sitemap">Sitemap</a></li>
+                        <li><a className="nav-link" href="#others">Others ({this.state.count_others})</a></li>
+                        <li><a className="nav-link" href="#structured_data">Structured Data ({this.state.count_structured_data})</a></li>
+                        <li><a className="nav-link link-error" id="errors-tab" href="#errors">Errors ({this.state.count_errors})</a></li>
+                      </ul>
 
-                        <div className="tab-content" id="myTabContent">
-                            <div className="tab-pane fade show active" id="link" role="tabpanel" aria-labelledby="link-tab">All links</div>
-                            <div className="tab-pane fade" id="img" role="tabpanel" aria-labelledby="img-tab">All images</div>
-                            <div className="tab-pane fade" id="headings" role="tabpanel" aria-labelledby="headings-tab">All headings</div>
-                            <div className="tab-pane fade" id="meta" role="tabpanel" aria-labelledby="meta-tab">All meta</div>
-                            <div className="tab-pane fade" id="robots" role="tabpanel" aria-labelledby="robots-tab">All robots</div>
-                            <div className="tab-pane fade" id="sitemap" role="tabpanel" aria-labelledby="sitemap-tab">All sitemap</div>
-                            <div className="tab-pane fade" id="others" role="tabpanel" aria-labelledby="others-tab">All others</div>
-                            <div className="tab-pane fade" id="structured_data" role="tabpanel" aria-labelledby="structured_data-tab">All structured ata</div>
-                            {/* @if(!empty($errors)) */}
-                            <div className="tab-pane fade" id="errors" role="tabpanel" aria-labelledby="errors-tab">All errors</div>
-                            {/* @endif */}
+                      <div className="tab-content">
+                        <div className="tab-pane fade show active" id="link">{this.state.step_link}</div>
+                        <div className="tab-pane fade" id="img">{this.state.step_image}</div>
+                        <div className="tab-pane fade" id="headings">{this.state.step_heading}</div>
+                        <div className="tab-pane fade" id="meta">{this.state.step_meta}</div>
+                        <div className="tab-pane fade" id="robots">{this.state.step_robots}</div>
+                        <div className="tab-pane fade" id="sitemap">{this.state.step_sitemap}</div>
+                        <div className="tab-pane fade" id="others">{this.state.step_others}</div>
+                        <div className="tab-pane fade" id="structured_data">{this.state.step_structured_data}</div>
+                        <div className="tab-pane fade" id="errors">{this.state.step_errors}</div>
+                      </div>
+                    </div> }
+
+                    <a href="main-content" className="visually-hidden" title="Main Content">Main Contant</a>
+
+                      <div className="content" id="main-content">
+                        <div className="row">
+                          <div className="col-sm-9">
+                            <h1>Tools by Piero Nanni</h1>
+                            <h2>This tool has been created in order to provide a little help when in trouble with SEO problematics.</h2>
+                            <h3>If you have suggestions or if you want to leave a message, check my <a href="https://www.pieronanni.com" target="_blank" title="Visit me!" rel="noopener noreferrer">website</a></h3>
+                          </div>
+                          <aside className="col-sm-3">
+                            <span>Do you like what are you seeing? Give me a feedback</span>
+                            <form className="vote" onSubmit={this.starSubmit}>
+                              <input type="hidden" name="ip" />
+                              <div className="radio"><label><input type="radio" name="vote" value="1" onChange={this.onChange} required /> 1 star (crappy)</label></div>
+                              <div className="radio"><label><input type="radio" name="vote" value="2" onChange={this.onChange} /> 2 star (indecent)</label></div>
+                              <div className="radio"><label><input type="radio" name="vote" value="3" onChange={this.onChange} /> 3 star (medium)</label></div>
+                              <div className="radio"><label><input type="radio" name="vote" value="4" onChange={this.onChange} /> 4 star (not bad)</label></div>
+                              <div className="radio"><label><input type="radio" name="vote" value="5" onChange={this.onChange} /> 5 star (superbe)</label></div>
+                              <button type="submit" className="btn">Submit</button>
+                              <div className="response"></div>
+                            </form>
+                          </aside>
                         </div>
-
-                    {/* <a href="#" id="main-content" title="Main Content">Main Contant</a> */}
-
-                        <div className="content">
-                            <div className="row">
-                                <div className="col-sm-9">
-                                    <h1>Tools by Piero Nanni</h1>
-                                    <h2>This tool has been created in order to provide a little help when in trouble with SEO problematics.</h2>
-                                    <h3>If you have suggestions or if you want to leave a message, check my <a href="https://www.pieronanni.com" target="_blank" title="Visit me!" rel="noopener noreferrer">website</a></h3>
-                                </div>
-                                <aside className="col-sm-3">
-                                    <span>Do you like what are you seeing? Give me a feedback</span>
-                                    <form className="vote" onSubmit={this.starSubmit}>
-                                        <input type="hidden" name="ip" />
-                                        <div className="radio"><label><input type="radio" name="vote" value="1" onChange={this.onChange} required /> 1 star (crappy)</label></div>
-                                        <div className="radio"><label><input type="radio" name="vote" value="2" onChange={this.onChange} /> 2 star (indecent)</label></div>
-                                        <div className="radio"><label><input type="radio" name="vote" value="3" onChange={this.onChange} /> 3 star (medium)</label></div>
-                                        <div className="radio"><label><input type="radio" name="vote" value="4" onChange={this.onChange} /> 4 star (not bad)</label></div>
-                                        <div className="radio"><label><input type="radio" name="vote" value="5" onChange={this.onChange} /> 5 star (superbe)</label></div>
-                                        <button type="submit" className="btn">Submit</button>
-                                        <div className="response"></div>
-                                    </form>
-
-                                </aside>
-                            </div>
-                        </div>
+                      </div>
                 
                 </div>
             </div>
