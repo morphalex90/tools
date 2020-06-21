@@ -11,9 +11,12 @@
 }
 
 .options {
-    display: none;
+    height: 0;
+    transform: scale(0);
+    transition: transform .4s cubic-bezier(.5,0,.3,1);
 }
 
 .options.is-active {
-    display: block;
+    height: auto;
+    transform: scale(1);
 }
