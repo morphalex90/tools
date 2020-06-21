@@ -187,7 +187,7 @@ class App extends React.Component {
                         <div className="row">
                           <div className="col-sm-9">
                             <h1>Tools by Piero Nanni</h1>
-                            <h2>This tool has been created in order to provide a little help when in trouble with SEO problematics.</h2>
+                            <h2>This tool has been created in order to provide a little help when in trouble with SEO problematics</h2>
                             <h3>If you have suggestions or if you want to leave a message, check my <a href="https://www.pieronanni.com" target="_blank" title="Visit me!" rel="noopener noreferrer">website</a></h3>
                           </div>
                           <aside className="col-sm-3">
