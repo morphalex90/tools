@@ -2,23 +2,8 @@ body  {
     font-size: 13px;
 }
 
-body h1 {
+h1 {
     font-weight: bold;
-}
-
-footer {
-    background: #E12D0E;
-    margin-top: 20px;
-    padding: 20px;
-    color: #FFF;
-}
-
-footer a {
-    color: #FFF;
-}
-
-footer a:hover {
-    color: #FFF;
 }
 
 .btn {
@@ -27,6 +12,7 @@ footer a:hover {
     color: #FFF;
     padding: 4px 6px;
     border-radius: 4px;
+    cursor: pointer;
 }
 
 .btn:hover {
@@ -35,21 +21,20 @@ footer a:hover {
     color: #E12D0E;
 }
 
-header .btn,
-header .form-group {
-    margin-right: 5px;
+header .btn {
+    margin-left: 5px;
 }
 
 .content {
     padding: 20px 0;
 }
 
-.inspect .search-url {
-    width: calc( 100% - 250px )
+.inspect input {
+    width: 100%;
 }
 
-.inspect input {
-    width: 100% !important;
+.inspect .inspect__url {
+    width: calc( 100% - 175px )
 }
 
 .visually-hidden {
@@ -80,7 +65,7 @@ label {
     color: #F00;
 }
 
-.overlay {
+/* .overlay {
     position: fixed;
     height: 100%;
     width: 100%;
@@ -101,11 +86,4 @@ label {
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-}
-
-@media only screen and (max-width:768px){
-    .inspect .form-group {
-        width: 100% !important;
-        margin-bottom: 5px;
-    }
-}
+} */

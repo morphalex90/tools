@@ -19,6 +19,7 @@ class App extends React.Component {
       auth_username: '',
       auth_password: '',
       search: 0,
+      options_open: false,
     };
   }
 
@@ -38,6 +39,11 @@ class App extends React.Component {
 
   onChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
+  }
+
+  onOpenOptions = (e) => {
+    const options_open = this.state.options_open;
+    this.setState({ options_open: !options_open });
   }
 
   starSubmit = (e) => {
@@ -122,32 +128,26 @@ class App extends React.Component {
                 <div className="col-sm-12">
                     <br />
                     <header className="text-center">
-                      <form className="form-inline inspect" action="/getsiteurl" method="get" onSubmit={this.siteSubmit}>
-                        <div className="form-group search-url">
-                          <input type="text" name="url" className="form-control" value={url} onChange={this.onChange} required />
-                        </div>
-                        <input type="hidden" value="100" name="id" />
+                      <form className="inspect" onSubmit={this.siteSubmit}>
+                        <input type="text" name="url" className="inspect__url" value={url} onChange={this.onChange} required />
                         <button type="submit" className="btn">Inspect</button>
                         <a href="/" className="btn" title="Reset">Reset</a>
-                        <a className="btn" data-toggle="collapse" href="#options">Options</a>
-                        <div id="options" className="collapse">
+                        <button type="button" className="btn" onClick={this.onOpenOptions}>Options</button>
+
+                        <div className={this.state.options_open ? 'options is-active': 'options'}>
                           <br />
                           <div className="row">
                               <div className="col-sm-4 text-left">
-                                <h5>HTTP Authentication</h5>
-                                <div>If your site is password protected</div>
+                                <h4>HTTP Authentication</h4>
+                                <p>In case the site is password protected</p>
                               </div>
                               <div className="col-sm-4">
-                                  <div className="form-group">
-                                    <label htmlFor="auth_username">Username</label>
-                                    <input type="text" name="auth_username" id="auth_username" value={auth_username} onChange={this.onChange} className="form-control" />
-                                  </div>
+                                <label htmlFor="auth_username">Username</label>
+                                <input type="text" name="auth_username" id="auth_username" value={auth_username} onChange={this.onChange} className="inspect__username" />
                               </div>
                               <div className="col-sm-4">
-                                  <div className="form-group">
-                                    <label htmlFor="auth_password">Password</label>
-                                    <input type="text" name="auth_password" id="auth_password" value={auth_password} onChange={this.onChange} className="form-control" />
-                                  </div>
+                                <label htmlFor="auth_password">Password</label>
+                                <input type="text" name="auth_password" id="auth_password" value={auth_password} onChange={this.onChange} className="inspect_password" />
                               </div>
                           </div>
                         </div>

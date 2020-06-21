@@ -9,3 +9,11 @@
 .text-center {
     text-align: center !important;
 }
+
+.options {
+    display: none;
+}
+
+.options.is-active {
+    display: block;
+}
