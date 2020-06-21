@@ -180,7 +180,8 @@ class App extends React.Component {
                       </div>
                     </div> }
 
-                    <a href="main-content" className="visually-hidden" title="Main Content">Main Contant</a>
+                    {this.state.search === 0 && <div>
+                      <a href="main-content" className="visually-hidden" title="Main Content">Main Contant</a>
 
                       <div className="content" id="main-content">
                         <div className="row">
@@ -204,6 +205,7 @@ class App extends React.Component {
                           </aside>
                         </div>
                       </div>
+                    </div> }
                 
                 </div>
             </div>
