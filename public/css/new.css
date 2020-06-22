@@ -20,3 +20,43 @@
     height: auto;
     transform: scale(1);
 }
+
+ul.nav {
+    padding-left: 0;
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #000;
+}
+
+ul.nav li {
+    border: 1px solid #000;
+    margin-right: 10px;
+    padding: 7px;
+    border-bottom: 1px solid #FFF;
+    margin-bottom: -1px;
+    border-radius: 3px 3px 0 0;
+}
+
+ul.nav li .nav-link {
+    font-size: 16px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+ul.nav li .nav-link.is-active {
+    color: #E12D0E;
+}
+
+.tab-content .tab-pane {
+    display: none;
+}
+
+.tab-content .tab-pane.is-active {
+    display: block;
+}
+
+.table {
+    width: 100%;
+}

@@ -15,11 +15,12 @@ class App extends React.Component {
       count_star: 0,
       vote: '',
       ip: '',
-      url: '',
+      url: 'https://www.pieronanni.com',
       auth_username: '',
       auth_password: '',
       search: 0,
       options_open: false,
+      active_tab: 'link',
     };
   }
 
@@ -44,6 +45,13 @@ class App extends React.Component {
   onOpenOptions = (e) => {
     const options_open = this.state.options_open;
     this.setState({ options_open: !options_open });
+  }
+
+  changeTab = (e) => {
+    e.preventDefault();
+    let tab = e.target.getAttribute('data-tab');
+    console.log(tab);
+    this.setState({ active_tab: tab });
   }
 
   starSubmit = (e) => {
@@ -156,27 +164,27 @@ class App extends React.Component {
                     
                     {this.state.search === 1 && <div>
                       <ul className="nav">
-                        <li><a className="nav-link active" id="link-tab" href="#link">Link ({this.state.count_link})</a></li>
-                        <li><a className="nav-link" href="#img">Images ({this.state.count_image})</a></li>
-                        <li><a className="nav-link" href="#headings">Headings ({this.state.count_heading})</a></li>
-                        <li><a className="nav-link" href="#meta">Meta ({this.state.count_meta})</a></li>
-                        <li><a className="nav-link" href="#robots">Robots</a></li>
-                        <li><a className="nav-link" href="#sitemap">Sitemap</a></li>
-                        <li><a className="nav-link" href="#others">Others ({this.state.count_others})</a></li>
-                        <li><a className="nav-link" href="#structured_data">Structured Data ({this.state.count_structured_data})</a></li>
-                        <li><a className="nav-link link-error" id="errors-tab" href="#errors">Errors ({this.state.count_errors})</a></li>
+                        <li><button type="button" className={this.state.active_tab === 'link' ? 'nav-link is-active': 'nav-link'} onClick={this.changeTab} data-tab="link">Link ({this.state.count_link})</button></li>
+                        <li><button type="button" className={this.state.active_tab === 'img' ? 'nav-link is-active': 'nav-link'} onClick={this.changeTab} data-tab="img">Images ({this.state.count_image})</button></li>
+                        <li><button type="button" className={this.state.active_tab === 'headings' ? 'nav-link is-active': 'nav-link'} onClick={this.changeTab} data-tab="headings">Headings ({this.state.count_heading})</button></li>
+                        <li><button type="button" className={this.state.active_tab === 'meta' ? 'nav-link is-active': 'nav-link'} onClick={this.changeTab} data-tab="meta">Meta ({this.state.count_meta})</button></li>
+                        <li><button type="button" className={this.state.active_tab === 'robots' ? 'nav-link is-active': 'nav-link'} onClick={this.changeTab} data-tab="robots">Robots</button></li>
+                        <li><button type="button" className={this.state.active_tab === 'sitemap' ? 'nav-link is-active': 'nav-link'} onClick={this.changeTab} data-tab="sitemap">Sitemap</button></li>
+                        <li><button type="button" className={this.state.active_tab === 'others' ? 'nav-link is-active': 'nav-link'} onClick={this.changeTab} data-tab="others">Others ({this.state.count_others})</button></li>
+                        <li><button type="button" className={this.state.active_tab === 'structured_data' ? 'nav-link is-active': 'nav-link'} onClick={this.changeTab} data-tab="structured_data">Structured Data ({this.state.count_structured_data})</button></li>
+                        <li><button type="button" className={this.state.active_tab === 'errors' ? 'nav-link is-active': 'nav-link'} onClick={this.changeTab} data-tab="errors">Errors ({this.state.count_errors})</button></li>
                       </ul>
 
                       <div className="tab-content">
-                        <div className="tab-pane fade show active" id="link">{this.state.step_link}</div>
-                        <div className="tab-pane fade" id="img">{this.state.step_image}</div>
-                        <div className="tab-pane fade" id="headings">{this.state.step_heading}</div>
-                        <div className="tab-pane fade" id="meta">{this.state.step_meta}</div>
-                        <div className="tab-pane fade" id="robots">{this.state.step_robots}</div>
-                        <div className="tab-pane fade" id="sitemap">{this.state.step_sitemap}</div>
-                        <div className="tab-pane fade" id="others">{this.state.step_others}</div>
-                        <div className="tab-pane fade" id="structured_data">{this.state.step_structured_data}</div>
-                        <div className="tab-pane fade" id="errors">{this.state.step_errors}</div>
+                        <div className={this.state.active_tab === 'link' ? 'tab-pane is-active': 'tab-pane'} dangerouslySetInnerHTML={{ __html: this.state.step_link }} />
+                        <div className={this.state.active_tab === 'img' ? 'tab-pane is-active': 'tab-pane'} dangerouslySetInnerHTML={{ __html: this.state.step_image}} />
+                        <div className={this.state.active_tab === 'headings' ? 'tab-pane is-active': 'tab-pane'} dangerouslySetInnerHTML={{ __html: this.state.step_heading}} />
+                        <div className={this.state.active_tab === 'meta' ? 'tab-pane is-active': 'tab-pane'} dangerouslySetInnerHTML={{ __html: this.state.step_meta}} />
+                        <div className={this.state.active_tab === 'robots' ? 'tab-pane is-active': 'tab-pane'} dangerouslySetInnerHTML={{ __html: this.state.step_robots}} />
+                        <div className={this.state.active_tab === 'sitemap' ? 'tab-pane is-active': 'tab-pane'} dangerouslySetInnerHTML={{ __html: this.state.step_sitemap}} />
+                        <div className={this.state.active_tab === 'others' ? 'tab-pane is-active': 'tab-pane'} dangerouslySetInnerHTML={{ __html: this.state.step_others}} />
+                        <div className={this.state.active_tab === 'structured_data' ? 'tab-pane is-active': 'tab-pane'} dangerouslySetInnerHTML={{ __html: this.state.step_structured_data}} />
+                        <div className={this.state.active_tab === 'errors' ? 'tab-pane is-active': 'tab-pane'} dangerouslySetInnerHTML={{ __html: this.state.step_errors}} />
                       </div>
                     </div> }
 
@@ -191,7 +199,7 @@ class App extends React.Component {
                             <h3>If you have suggestions or if you want to leave a message, check my <a href="https://www.pieronanni.com" target="_blank" title="Visit me!" rel="noopener noreferrer">website</a></h3>
                           </div>
                           <aside className="col-sm-3">
-                            <span>Do you like what are you seeing? Give me a feedback</span>
+                            <span>Do you find this tool useful? Tell me what do you think</span>
                             <form className="vote" onSubmit={this.starSubmit}>
                               <input type="hidden" name="ip" />
                               <div className="radio"><label><input type="radio" name="vote" value="1" onChange={this.onChange} required /> 1 star (crappy)</label></div>
