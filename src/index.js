@@ -21,6 +21,8 @@ class App extends React.Component {
       search: 0,
       options_open: false,
       active_tab: 'link',
+      message_status: '',
+      message_text: ''
     };
   }
 
@@ -57,7 +59,25 @@ class App extends React.Component {
   starSubmit = (e) => {
     e.preventDefault();
     const data = new FormData(e.target);
-    fetch(API_URL+'/api/v1/tools/star', { method: 'post', body: data}).then(response => this.getAverageStar() );
+    fetch(API_URL+'/api/v1/tools/star', { method: 'post', body: data})
+    .then((response) => {
+      if( response.ok ) {
+        this.setState({ message_status: 'status', message_text: 'Thank you' });
+        this.getAverageStar();
+      } else if( response.status === 422 ) {
+        this.setState({ message_status: 'warning' });
+      }
+      return response.json();
+    })
+    .then((data) => {
+      if( this.state.message_status === 'warning' ) {
+        this.setState({ message_text: data.vote });
+      }
+    })
+    .catch((error) => {
+      console.log('error: ' + error);
+      this.setState({ message_status: 'error', message_text: 'Something went bananas, contact the administrator' });
+    });
   }
 
   siteSubmit = (e) => {
@@ -131,6 +151,12 @@ class App extends React.Component {
     return (
       <div className="App">
 
+        {this.state.message_status !== '' &&
+        <div className={'message message__' + this.state.message_status}>
+          <div>{this.state.message_text}</div>
+        </div>
+        }
+        
         <div className="container">
             <div className="row">
                 <div className="col-sm-12">
