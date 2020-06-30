@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+import axios from 'axios';
 // import logo from './logo.svg';
 import * as serviceWorker from './serviceWorker';
 
@@ -58,25 +59,22 @@ class App extends React.Component {
 
   starSubmit = (e) => {
     e.preventDefault();
-    const data = new FormData(e.target);
-    fetch(API_URL+'/api/v1/tools/star', { method: 'post', body: data})
+    let data = new FormData(e.target);
+    axios
+    .post(API_URL+'/api/v1/tools/star', data)
     .then((response) => {
-      if( response.ok ) {
-        this.setState({ message_status: 'status', message_text: 'Thank you' });
-        this.getAverageStar();
-      } else if( response.status === 422 ) {
-        this.setState({ message_status: 'warning' });
-      }
-      return response.json();
-    })
-    .then((data) => {
-      if( this.state.message_status === 'warning' ) {
-        this.setState({ message_text: data.vote });
+      if( response.status === 200 ) {
+        this.setState({ message_status: 'success', message_text: 'Thank you' }, () => this.getAverageStar());
       }
     })
     .catch((error) => {
-      console.log('error: ' + error);
-      this.setState({ message_status: 'error', message_text: 'Something went bananas, contact the administrator' });
+      if (error.response && error.response.status === 422) { 
+        this.setState({ message_status: 'warning', message_text: error.response.data.vote[0] });
+      } else {
+        console.log(error);
+        this.setState({ message_status: 'error', message_text: 'Something went bananas, contact the administrator' });
+      }
+      
     });
   }
 
