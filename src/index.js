@@ -1,9 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import axios from 'axios';
-// import logo from './logo.svg';
 import * as serviceWorker from './serviceWorker';
+
+// import logo from './logo.svg';
+import './css/grid.css';
+import './css/style.css';
+import './css/footer.css';
 
 const API_URL = 'https://phplaravel-382225-1341568.cloudwaysapps.com';
 // const API_URL = 'http://api.local';
