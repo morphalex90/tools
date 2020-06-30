@@ -203,3 +203,14 @@ ul.nav li .nav-link.is-active {
     color: #721c24;
     background-color: #f8d7da;
 }
+
+.loading {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 40px;
+    width: 40px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+}

@@ -26,7 +26,8 @@ class App extends React.Component {
       options_open: false,
       active_tab: 'link',
       message_status: '',
-      message_text: ''
+      message_text: '',
+      isLoading: true,
     };
   }
 
@@ -38,7 +39,7 @@ class App extends React.Component {
     try {
       let response = await fetch(API_URL+'/api/v1/tools/average_star');
       let responseJson = await response.json();
-      this.setState({ average_star: responseJson.average, count_star: responseJson.count });
+      this.setState({ average_star: responseJson.average, count_star: responseJson.count, isLoading: false });
      } catch(error) {
       console.error(error);
     }
@@ -61,6 +62,7 @@ class App extends React.Component {
   }
 
   starSubmit = (e) => {
+    this.setState({ isLoading: true });
     e.preventDefault();
     let data = new FormData(e.target);
     axios
@@ -69,6 +71,7 @@ class App extends React.Component {
       if( response.status === 200 ) {
         this.setState({ message_status: 'success', message_text: 'Thank you' }, () => this.getAverageStar());
       }
+      this.setState({ isLoading: false });
     })
     .catch((error) => {
       if (error.response && error.response.status === 422) { 
@@ -77,11 +80,12 @@ class App extends React.Component {
         console.log(error);
         this.setState({ message_status: 'error', message_text: 'Something went bananas, contact the administrator' });
       }
-      
+      this.setState({ isLoading: false });
     });
   }
 
   siteSubmit = (e) => {
+    this.setState({ isLoading: true });
     e.preventDefault();
     const data = new FormData(e.target);
     fetch(API_URL+'/api/v1/tools/step_link', { method: 'post', body: data})
@@ -142,7 +146,7 @@ class App extends React.Component {
   stepErrors(data) {
     fetch(API_URL+'/api/v1/tools/step_errors', { method: 'post', body: data})
     .then(response => response.json())
-    .then(response => this.setState({ count_errors: response.count, step_errors: response.response }) );
+    .then(response => this.setState({ count_errors: response.count, step_errors: response.response, isLoading: false }) );
   }
 
   render() {
@@ -157,6 +161,8 @@ class App extends React.Component {
           <div>{this.state.message_text}</div>
         </div>
         }
+
+        {this.state.isLoading === true && <div className="loading"></div> }
         
         <div className="container">
             <div className="row">
