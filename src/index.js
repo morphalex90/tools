@@ -19,7 +19,7 @@ class App extends React.Component {
       count_star: 0,
       vote: '',
       ip: '',
-      url: 'https://www.pieronanni.com',
+      url: 'https://www.pieronanni.com/about',
       auth_username: '',
       auth_password: '',
       search: 0,
@@ -139,14 +139,7 @@ class App extends React.Component {
   stepStructuredData(data) {
     fetch(API_URL+'/api/v1/tools/step_structured_data', { method: 'post', body: data})
     .then(response => response.json())
-    .then(response => this.setState({ count_structured_data: response.count, step_structured_data: response.response }) )
-    .then(response => this.stepErrors(data) );
-  }
-
-  stepErrors(data) {
-    fetch(API_URL+'/api/v1/tools/step_errors', { method: 'post', body: data})
-    .then(response => response.json())
-    .then(response => this.setState({ count_errors: response.count, step_errors: response.response, isLoading: false }) );
+    .then(response => this.setState({ count_structured_data: response.count, step_structured_data: response.response, isLoading: false }) ); //// IS LOADING
   }
 
   render() {
@@ -205,7 +198,6 @@ class App extends React.Component {
                         <li><button type="button" className={this.state.active_tab === 'sitemap' ? 'nav-link is-active': 'nav-link'} onClick={this.changeTab} data-tab="sitemap">Sitemap</button></li>
                         <li><button type="button" className={this.state.active_tab === 'others' ? 'nav-link is-active': 'nav-link'} onClick={this.changeTab} data-tab="others">Others ({this.state.count_others})</button></li>
                         <li><button type="button" className={this.state.active_tab === 'structured_data' ? 'nav-link is-active': 'nav-link'} onClick={this.changeTab} data-tab="structured_data">Structured Data ({this.state.count_structured_data})</button></li>
-                        <li><button type="button" className={this.state.active_tab === 'errors' ? 'nav-link is-active': 'nav-link'} onClick={this.changeTab} data-tab="errors">Errors ({this.state.count_errors})</button></li>
                       </ul>
 
                       <div className="tab-content">
@@ -217,7 +209,6 @@ class App extends React.Component {
                         <div className={this.state.active_tab === 'sitemap' ? 'tab-pane is-active': 'tab-pane'} dangerouslySetInnerHTML={{ __html: this.state.step_sitemap}} />
                         <div className={this.state.active_tab === 'others' ? 'tab-pane is-active': 'tab-pane'} dangerouslySetInnerHTML={{ __html: this.state.step_others}} />
                         <div className={this.state.active_tab === 'structured_data' ? 'tab-pane is-active': 'tab-pane'} dangerouslySetInnerHTML={{ __html: this.state.step_structured_data}} />
-                        <div className={this.state.active_tab === 'errors' ? 'tab-pane is-active': 'tab-pane'} dangerouslySetInnerHTML={{ __html: this.state.step_errors}} />
                       </div>
                     </div> }
 
