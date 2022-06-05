@@ -1,0 +1,20 @@
+.search-box {
+    &__options {
+        display: none;
+
+        &.--open {
+            display: block;
+        }
+    }
+
+    &__url {
+        border-radius: 5px;
+        padding: 5px;
+        width: 100%;
+        max-width: calc(100% - 115px);
+    }
+
+    .btn {
+        margin-left: 5px;
+    }
+}
