@@ -1,0 +1,42 @@
+.footer {
+    padding: 20px 0;
+    background-color: #e12d0e;
+    color: #fff;
+    margin-top: 20px;
+
+    a {
+        color: #fff;
+    }
+
+    &__container {
+        max-width: 1400px;
+        width: 95%;
+        margin: auto;
+
+        @media only screen and (min-width: 768px) {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+    }
+
+    &__copy {
+        width: 100%;
+        text-align: center;
+
+        @media only screen and (min-width: 768px) {
+            max-width: calc(70% - 10px);
+            text-align: left;
+        }
+    }
+
+    &__feedbacks {
+        width: 100%;
+        text-align: center;
+
+        @media only screen and (min-width: 768px) {
+            max-width: calc(30% - 10px);
+            text-align: left;
+        }
+    }
+}
