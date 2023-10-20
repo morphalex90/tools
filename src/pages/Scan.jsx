@@ -1,7 +1,7 @@
 // import { Link } from "react-router-dom";
 
 import { useEffect, useState } from "react";
-import axios from 'axios';
+import axios from "../lib/axios";
 import { useParams } from "react-router-dom";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
@@ -9,14 +9,10 @@ import Layout from "../components/Layout";
 import '../sass/tabs.scss'
 import '../sass/table.scss'
 
-import API_URL from "../API_URL";
-
 export default function Scan() {
 	let { scan_uuid } = useParams();
 
 	const [isLoading, setIsLoading] = useState(false);
-
-
 	const [scan, setScan] = useState(null);
 	const [stepLinks, setStepLinks] = useState(null); const [stepLinksCount, setStepLinksCount] = useState(null);
 	const [stepImages, setStepImages] = useState(null); const [stepImagesCount, setStepImagesCount] = useState(null);
@@ -32,7 +28,7 @@ export default function Scan() {
 		async function fetchData() {
 			setIsLoading(true);
 
-			await axios.get(API_URL + '/api/v1/tools/scans/' + scan_uuid)
+			await axios.get('/api/v1/tools/scans/' + scan_uuid)
 				.then((response) => {
 					setScan(response.data.scan);
 					// console.log(response.data.scan);
@@ -51,7 +47,7 @@ export default function Scan() {
 	}, []);
 
 	const stepLinksFunct = () => {
-		axios.get(API_URL + '/api/v1/tools/scans/' + scan_uuid + '/step_links')
+		axios.get('/api/v1/tools/scans/' + scan_uuid + '/step_links')
 			.then((response) => {
 				setStepLinks(response.data.response);
 				setStepLinksCount(response.data.count);
@@ -59,7 +55,7 @@ export default function Scan() {
 	}
 
 	const stepImagesFunct = () => {
-		axios.get(API_URL + '/api/v1/tools/scans/' + scan_uuid + '/step_images')
+		axios.get('/api/v1/tools/scans/' + scan_uuid + '/step_images')
 			.then((response) => {
 				// console.log(response.data);
 				setStepImages(response.data.response);
@@ -68,7 +64,7 @@ export default function Scan() {
 	}
 
 	const stepHeadingsFunct = () => {
-		axios.get(API_URL + '/api/v1/tools/scans/' + scan_uuid + '/step_headings')
+		axios.get('/api/v1/tools/scans/' + scan_uuid + '/step_headings')
 			.then((response) => {
 				// console.log(response.data);
 				setStepHeadings(response.data.response);
@@ -77,7 +73,7 @@ export default function Scan() {
 	}
 
 	const stepMetaFunct = () => {
-		axios.get(API_URL + '/api/v1/tools/scans/' + scan_uuid + '/step_meta')
+		axios.get('/api/v1/tools/scans/' + scan_uuid + '/step_meta')
 			.then((response) => {
 				// console.log(response.data);
 				setStepMeta(response.data.response);
@@ -86,7 +82,7 @@ export default function Scan() {
 	}
 
 	const stepRobotsFunct = () => {
-		axios.get(API_URL + '/api/v1/tools/scans/' + scan_uuid + '/step_robots')
+		axios.get('/api/v1/tools/scans/' + scan_uuid + '/step_robots')
 			.then((response) => {
 				// console.log(response.data);
 				setStepRobots(response.data.response);
@@ -94,7 +90,7 @@ export default function Scan() {
 	}
 
 	const stepSitemapFunct = () => {
-		axios.get(API_URL + '/api/v1/tools/scans/' + scan_uuid + '/step_sitemap')
+		axios.get('/api/v1/tools/scans/' + scan_uuid + '/step_sitemap')
 			.then((response) => {
 				// console.log(response.data);
 				setStepSitemap(response.data.response);
@@ -102,7 +98,7 @@ export default function Scan() {
 	}
 
 	const stepOthersFunct = () => {
-		axios.get(API_URL + '/api/v1/tools/scans/' + scan_uuid + '/step_others')
+		axios.get('/api/v1/tools/scans/' + scan_uuid + '/step_others')
 			.then((response) => {
 				// console.log(response.data);
 				setStepOthers(response.data.response);
@@ -111,7 +107,7 @@ export default function Scan() {
 	}
 
 	const stepStructuredDataFunct = () => {
-		axios.get(API_URL + '/api/v1/tools/scans/' + scan_uuid + '/step_structured_data')
+		axios.get('/api/v1/tools/scans/' + scan_uuid + '/step_structured_data')
 			.then((response) => {
 				// console.log(response.data);
 				setStepStructuredData(response.data.response);

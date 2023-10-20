@@ -1,7 +1,6 @@
 // import { Link } from "react-router-dom";
 import { useState } from "react";
-
-import axios from 'axios';
+import axios from "../lib/axios";
 import '../sass/aside.scss'
 
 export default function Aside() {
@@ -17,7 +16,7 @@ export default function Aside() {
         e.preventDefault();
 
         axios
-            .post(import.meta.env.VITE_API_URL + '/api/v1/tools/star', inputs)
+            .post('/api/v1/tools/star', inputs)
             .then((response) => {
                 if (response.status === 200) {
                     setResponse('Thank you for the feedback!');

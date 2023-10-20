@@ -1,7 +1,6 @@
 // import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from 'axios';
-
+import axios from "../lib/axios";
 import '../sass/footer.scss'
 
 export default function Footer(props) {
@@ -10,7 +9,7 @@ export default function Footer(props) {
 
     useEffect(() => {
         async function fetchData() {
-            await axios.get(import.meta.env.VITE_API_URL + '/api/v1/tools/average_star')
+            await axios.get('/api/v1/tools/average_star')
                 .then((response) => {
                     setStars(response.data.average);
                     setFeedbacks(response.data.count);
@@ -23,7 +22,7 @@ export default function Footer(props) {
         <>
             <footer className="footer">
                 <div className="footer__container">
-                    <div className="footer__copy">Idea &amp; code by <a href="https://www.pieronanni.com" target="_blank">Piero Nanni</a></div>
+                    <div className="footer__copy">Idea &amp; code by <a href="https://www.pieronanni.me" target="_blank">Piero Nanni</a></div>
                     <div className="footer__feedbacks">
                         <div itemProp="aggregateRating" itemScope itemType="http://schema.org/AggregateRating">
                             <meta itemProp="bestRating" content="5" />

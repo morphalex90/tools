@@ -1,13 +1,10 @@
 // import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from 'axios';
-
+import axios from "../lib/axios";
 import '../sass/searchbox.scss'
 
 export default function SearchBox(props) {
-    const [inputs, setInputs] = useState({
-        url: 'https://www.pieronanni.com/projects',
-    });
+    const [inputs, setInputs] = useState({ url: 'https://www.pieronanni.com/projects' });
     const [optionsToggle, setOptionsToggle] = useState(false);
 
     const handleChange = (e) => {
@@ -22,11 +19,10 @@ export default function SearchBox(props) {
         e.preventDefault();
         console.log(inputs);
 
-        axios.post(import.meta.env.VITE_API_URL + '/api/v1/tools/scans', inputs)
+        axios.post('/api/v1/tools/scans', inputs)
             .then((response) => {
                 console.log(response.data);
                 window.location.href = '/scan/' + response.data.uuid
-
             });
     }
 
