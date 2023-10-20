@@ -13,7 +13,7 @@ export default function Header() {
                 <div className="header__menu">
                     <ul>
                         <li><Link to="/about">About</Link></li>
-                        <li><a href="https://www.pieronanni.com/contact" target="_blank" rel="no-referer">Contact</a></li>
+                        <li><a href="https://www.pieronanni.me/contact" target="_blank" rel="no-referer">Contact</a></li>
                     </ul>
                 </div>
             </div>

@@ -4,7 +4,7 @@ import axios from "../lib/axios";
 import '../sass/searchbox.scss'
 
 export default function SearchBox(props) {
-    const [inputs, setInputs] = useState({ url: 'https://www.pieronanni.com/projects' });
+    const [inputs, setInputs] = useState({ url: '' });
     const [optionsToggle, setOptionsToggle] = useState(false);
 
     const handleChange = (e) => {
@@ -17,11 +17,11 @@ export default function SearchBox(props) {
 
     const sendData = (e) => {
         e.preventDefault();
-        console.log(inputs);
+        // console.log(inputs);
 
         axios.post('/api/v1/tools/scans', inputs)
             .then((response) => {
-                console.log(response.data);
+                // console.log(response.data);
                 window.location.href = '/scan/' + response.data.uuid
             });
     }
@@ -31,7 +31,7 @@ export default function SearchBox(props) {
             <div className="search-box__container">
                 <form className="inspect" onSubmit={sendData}>
                     <label htmlFor="url" className="visually-hidden">Url</label>
-                    <input type="url" name="url" id="url" className="search-box__url" required value={inputs.url} onChange={handleChange} maxLength="255" />
+                    <input type="url" name="url" id="url" className="search-box__url" required value={inputs.url} onChange={handleChange} maxLength={255} />
                     <button type="submit" className="btn">Scan</button>
                     <button type="button" className="btn" onClick={handleOptionsToggle}>Options</button>
 
