@@ -1,4 +1,3 @@
-// import { Link } from "react-router-dom";
 import { useState } from "react";
 import axios from "../lib/axios";
 import '../sass/aside.scss'
@@ -12,8 +11,8 @@ export default function Aside() {
     }
 
     const feedbackSubmit = (e) => {
-        setResponse(null);
         e.preventDefault();
+        setResponse(null);
 
         axios
             .post('/api/v1/tools/star', inputs)
@@ -24,15 +23,7 @@ export default function Aside() {
                 // this.setState({ isLoading: false });
             })
             .catch((error) => {
-                setResponse('Something went wrong, please contact the administrator');
-
-                // if (error.response && error.response.status === 422) {
-                //     this.setState({ message_status: 'warning', message_text: error.response.data.vote[0] });
-                // } else {
-                //     console.log(error);
-                //     this.setState({ message_status: 'error', message_text: 'Something went bananas, contact the administrator' });
-                // }
-                // this.setState({ isLoading: false });
+                setResponse(error.response.data.message);
             });
     }
 
