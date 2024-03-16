@@ -19,7 +19,7 @@ export default function Aside() {
             .post('/api/v1/tools/star', inputs)
             .then((response) => {
                 if (response.status === 200) {
-                    setResponse('Thank you for the feedback!');
+                    setResponse(response.data.message);
                 }
                 // this.setState({ isLoading: false });
             })
