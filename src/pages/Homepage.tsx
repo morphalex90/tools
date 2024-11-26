@@ -4,7 +4,6 @@ import Aside from "../components/Aside";
 import SearchBox from "../components/SearchBox";
 
 export default function Homepage() {
-	//   const { data } = props;
 	return (
 		<Layout page="homepage">
 			<div className="main__content">

@@ -1,21 +1,22 @@
 // import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, MouseEvent, useState } from "react";
 import axios from "../lib/axios";
 import '../sass/searchbox.scss'
 
-export default function SearchBox(props) {
+export default function SearchBox() {
     const [inputs, setInputs] = useState({ url: '' });
     const [optionsToggle, setOptionsToggle] = useState(false);
 
-    const handleChange = (e) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setInputs(values => ({ ...values, [e.target.name]: e.target.value }))
     }
 
-    const handleOptionsToggle = (e) => {
+    const handleOptionsToggle = (e: MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault()
         setOptionsToggle(!optionsToggle)
     }
 
-    const sendData = (e) => {
+    const sendData = (e: FormEvent) => {
         e.preventDefault();
         // console.log(inputs);
 

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "../lib/axios";
 import '../sass/footer.scss'
 
-export default function Footer(props) {
+export default function Footer({ isLoading }: { isLoading: boolean }) {
     const [stars, setStars] = useState(null);
     const [feedbacks, setFeedbacks] = useState(null);
 
@@ -32,7 +32,7 @@ export default function Footer(props) {
                 </div>
             </footer>
 
-            {props.isLoading === true && <div className="loading"></div>}
+            {isLoading === true && <div className="loading"></div>}
             {/* <Alert message={props.message_text} status={props.message_status} /> */}
         </>
     );

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import axios from "../lib/axios";
 import '../sass/aside.scss'
 
@@ -6,11 +6,11 @@ export default function Aside() {
     const [inputs, setInputs] = useState({});
     const [response, setResponse] = useState(null);
 
-    const handleChange = (e) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setInputs(values => ({ ...values, [e.target.name]: e.target.value }))
     }
 
-    const feedbackSubmit = (e) => {
+    const feedbackSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         setResponse(null);
 

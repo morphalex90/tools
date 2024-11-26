@@ -1,5 +1,3 @@
-// import { Link } from "react-router-dom";
-
 import { useEffect, useState } from "react";
 import axios from "../lib/axios";
 import { useParams } from "react-router-dom";
@@ -9,18 +7,75 @@ import Layout from "../components/Layout";
 import '../sass/tabs.scss'
 import '../sass/table.scss'
 
+interface StepLinkInterface {
+	error_class: string,
+	internal_text: string,
+	internal_title: string,
+	href: string,
+	target: string,
+	title: string,
+	rel: string,
+	class: string,
+	id: string,
+}
+
+interface StepImageInterface {
+	error_class: string,
+	error_title: string,
+	image: string,
+	data_src: string,
+	alt: string,
+	title: string,
+	height: string,
+	width: string,
+	class: string,
+	id: string,
+}
+
+interface StepHeadingInterface {
+	type: string,
+	text: string,
+	class: string,
+	id: string,
+}
+
+interface StepMetaInterface {
+	name: string,
+	content: ContentInterface,
+	type: TypeInterface,
+	property: string,
+}
+interface ContentInterface {
+	color: string,
+	content: string
+}
+interface TypeInterface {
+	content: string
+}
+
+interface StepOtherInterface {
+	type: string,
+	color: string,
+	value: string,
+}
+
+
+{/* <td>{meta.type ? meta.type.content : ''}</td>
+<td>{meta.name || meta.property}</td>
+<td><span style={{ color: (meta.content ? meta.content.color : '') }}>{meta.content ? meta.content.content : ''}</span></td> */}
+
 export default function Scan() {
-	let { scan_uuid } = useParams();
+	const { scan_uuid } = useParams();
 
 	const [isLoading, setIsLoading] = useState(false);
-	const [scan, setScan] = useState(null);
-	const [stepLinks, setStepLinks] = useState(null); const [stepLinksCount, setStepLinksCount] = useState(null);
-	const [stepImages, setStepImages] = useState(null); const [stepImagesCount, setStepImagesCount] = useState(null);
-	const [stepHeadings, setStepHeadings] = useState(null); const [stepHeadingsCount, setStepHeadingsCount] = useState(null);
-	const [stepMeta, setStepMeta] = useState(null); const [stepMetaCount, setStepMetaCount] = useState(null);
+	const [scan, setScan] = useState({ url: '', created_at: '' });
+	const [stepLinks, setStepLinks] = useState<StepLinkInterface[]>([]); const [stepLinksCount, setStepLinksCount] = useState(null);
+	const [stepImages, setStepImages] = useState<StepImageInterface[]>([]); const [stepImagesCount, setStepImagesCount] = useState(null);
+	const [stepHeadings, setStepHeadings] = useState<StepHeadingInterface[]>([]); const [stepHeadingsCount, setStepHeadingsCount] = useState(null);
+	const [stepMeta, setStepMeta] = useState<StepMetaInterface[]>([]); const [stepMetaCount, setStepMetaCount] = useState(null);
 	const [stepRobots, setStepRobots] = useState(null);
 	const [stepSitemap, setStepSitemap] = useState(null);
-	const [stepOthers, setStepOthers] = useState(null); const [stepOthersCount, setStepOthersCount] = useState(null);
+	const [stepOthers, setStepOthers] = useState<StepOtherInterface[]>([]); const [stepOthersCount, setStepOthersCount] = useState(null);
 	const [stepStructuredData, setStepStructuredData] = useState(null); const [stepStructuredDataCount, setStepStructuredDataCount] = useState(null);
 
 	useEffect(() => {
@@ -262,11 +317,11 @@ export default function Scan() {
 							</TabPanel>
 
 							<TabPanel>
-								<div dangerouslySetInnerHTML={{ __html: stepRobots }}></div>
+								<div dangerouslySetInnerHTML={{ __html: stepRobots || '' }}></div>
 							</TabPanel>
 
 							<TabPanel>
-								<div dangerouslySetInnerHTML={{ __html: stepSitemap }}></div>
+								<div dangerouslySetInnerHTML={{ __html: stepSitemap || '' }}></div>
 							</TabPanel>
 
 							<TabPanel>
