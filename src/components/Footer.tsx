@@ -1,6 +1,5 @@
-// import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import axios from "../lib/axios";
+import { useEffect, useState } from 'react';
+import axios from '../lib/axios';
 import '../sass/footer.scss'
 
 export default function Footer({ isLoading }: { isLoading: boolean }) {

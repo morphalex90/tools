@@ -1,5 +1,5 @@
-import { ChangeEvent, useState } from "react";
-import axios from "../lib/axios";
+import { ChangeEvent, useState } from 'react';
+import axios from '../lib/axios';
 import '../sass/aside.scss'
 
 export default function Aside() {
@@ -26,7 +26,6 @@ export default function Aside() {
                 setResponse(error.response.data.message);
             });
     }
-
 
     return (
         <aside className="aside">

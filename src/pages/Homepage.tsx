@@ -1,7 +1,6 @@
-// import { Link } from "react-router-dom";
-import Layout from "../components/Layout";
-import Aside from "../components/Aside";
-import SearchBox from "../components/SearchBox";
+import Layout from '../components/Layout';
+import Aside from '../components/Aside';
+import SearchBox from '../components/SearchBox';
 
 export default function Homepage() {
 	return (

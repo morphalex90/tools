@@ -1,6 +1,6 @@
 // import { Link } from "react-router-dom";
-import { ChangeEvent, FormEvent, MouseEvent, useState } from "react";
-import axios from "../lib/axios";
+import { ChangeEvent, FormEvent, MouseEvent, useState } from 'react';
+import axios from '../lib/axios';
 import '../sass/searchbox.scss'
 
 export default function SearchBox() {

@@ -1,11 +1,9 @@
-import { ReactNode } from "react";
-// import { Link } from "react-router-dom";
-import Header from "./Header";
-import Footer from "./Footer";
+import { ReactNode } from 'react';
+import Header from './Header';
+import Footer from './Footer';
 import '../sass/layout.scss'
 
 export default function Layout({ page, children, isLoading }: { page: string, children: ReactNode, isLoading?: boolean }) {
-
     return (
         <>
             <Header />

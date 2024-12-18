@@ -1,8 +1,6 @@
-// import { Link } from "react-router-dom";
-import Layout from "../components/Layout";
+import Layout from '../components/Layout';
 
 export default function About() {
-	//   const { data } = props;
 	return (
 		<Layout page="about">
 			<div className="main__content">

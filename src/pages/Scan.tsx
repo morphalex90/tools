@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import axios from "../lib/axios";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import axios from '../lib/axios';
+import { useParams } from 'react-router-dom';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 
 import Layout from "../components/Layout";
@@ -58,11 +58,6 @@ interface StepOtherInterface {
 	color: string,
 	value: string,
 }
-
-
-{/* <td>{meta.type ? meta.type.content : ''}</td>
-<td>{meta.name || meta.property}</td>
-<td><span style={{ color: (meta.content ? meta.content.color : '') }}>{meta.content ? meta.content.content : ''}</span></td> */}
 
 export default function Scan() {
 	const { scan_uuid } = useParams();
@@ -359,7 +354,6 @@ export default function Scan() {
 						<div>Scan not found</div>
 					</>
 				)}
-
 			</div>
 		</Layout>
 	);
