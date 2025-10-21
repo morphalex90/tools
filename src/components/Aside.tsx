@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { type ChangeEvent, useState } from 'react';
 import axios from '../lib/axios';
 import '../sass/aside.scss'
 

@@ -1,5 +1,5 @@
 // import { Link } from "react-router-dom";
-import { ChangeEvent, FormEvent, MouseEvent, useState } from 'react';
+import { type ChangeEvent, type FormEvent, type MouseEvent, useState } from 'react';
 import axios from '../lib/axios';
 import '../sass/searchbox.scss'
 
