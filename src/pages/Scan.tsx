@@ -59,6 +59,13 @@ interface StepOtherInterface {
 	value: string,
 }
 
+interface StepStructuredDataInterface {
+	type: string,
+	schema: string[],
+	valid: boolean,
+	value: unknown,
+}
+
 export default function Scan() {
 	const { scan_uuid } = useParams();
 
@@ -71,7 +78,7 @@ export default function Scan() {
 	const [stepRobots, setStepRobots] = useState(null);
 	const [stepSitemap, setStepSitemap] = useState(null);
 	const [stepOthers, setStepOthers] = useState<StepOtherInterface[]>([]); const [stepOthersCount, setStepOthersCount] = useState(null);
-	const [stepStructuredData, setStepStructuredData] = useState(null); const [stepStructuredDataCount, setStepStructuredDataCount] = useState(null);
+	const [stepStructuredData, setStepStructuredData] = useState<StepStructuredDataInterface[]>([]); const [stepStructuredDataCount, setStepStructuredDataCount] = useState(null);
 
 	useEffect(() => {
 
