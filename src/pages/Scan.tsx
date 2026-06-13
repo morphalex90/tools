@@ -344,8 +344,29 @@ export default function Scan() {
 							</TabPanel>
 
 							<TabPanel>
-								<br />
-								<div>{stepStructuredData}</div>
+								<table className="table">
+									<thead>
+										<tr>
+											<th>Type</th>
+											<th>Schema</th>
+											<th>Value</th>
+										</tr>
+									</thead>
+									{stepStructuredData &&
+										<tbody>
+											{stepStructuredData.map((item, key) => {
+												return (
+													<tr key={key}>
+														<td><span style={{ color: (item.valid ? 'green' : 'red') }}>{item.type}</span></td>
+														<td>{item.schema && item.schema.join(', ')}</td>
+														<td><pre>{typeof item.value === 'string' ? item.value : JSON.stringify(item.value, null, 2)}</pre></td>
+													</tr>
+												);
+											})}
+
+										</tbody>
+									}
+								</table>
 							</TabPanel>
 						</Tabs>
 					</>
