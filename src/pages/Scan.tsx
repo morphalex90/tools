@@ -81,14 +81,77 @@ export default function Scan() {
 	const [stepStructuredData, setStepStructuredData] = useState<StepStructuredDataInterface[]>([]); const [stepStructuredDataCount, setStepStructuredDataCount] = useState(null);
 
 	useEffect(() => {
+		const base = '/api/v1/tools/scans/' + scan_uuid;
+
+		const stepLinksFunct = () => {
+			axios.get(base + '/step_links')
+				.then((response) => {
+					setStepLinks(response.data.response);
+					setStepLinksCount(response.data.count);
+				});
+		}
+
+		const stepImagesFunct = () => {
+			axios.get(base + '/step_images')
+				.then((response) => {
+					setStepImages(response.data.response);
+					setStepImagesCount(response.data.count);
+				});
+		}
+
+		const stepHeadingsFunct = () => {
+			axios.get(base + '/step_headings')
+				.then((response) => {
+					setStepHeadings(response.data.response);
+					setStepHeadingsCount(response.data.count);
+				});
+		}
+
+		const stepMetaFunct = () => {
+			axios.get(base + '/step_meta')
+				.then((response) => {
+					setStepMeta(response.data.response);
+					setStepMetaCount(response.data.count);
+				});
+		}
+
+		const stepRobotsFunct = () => {
+			axios.get(base + '/step_robots')
+				.then((response) => {
+					setStepRobots(response.data.response);
+				});
+		}
+
+		const stepSitemapFunct = () => {
+			axios.get(base + '/step_sitemap')
+				.then((response) => {
+					setStepSitemap(response.data.response);
+				});
+		}
+
+		const stepOthersFunct = () => {
+			axios.get(base + '/step_others')
+				.then((response) => {
+					setStepOthers(response.data.response);
+					setStepOthersCount(response.data.count);
+				});
+		}
+
+		const stepStructuredDataFunct = () => {
+			axios.get(base + '/step_structured_data')
+				.then((response) => {
+					setStepStructuredData(response.data.response);
+					setStepStructuredDataCount(response.data.count);
+					setIsLoading(false);
+				});
+		}
 
 		async function fetchData() {
 			setIsLoading(true);
 
-			await axios.get('/api/v1/tools/scans/' + scan_uuid)
+			await axios.get(base)
 				.then((response) => {
 					setScan(response.data.scan);
-					// console.log(response.data.scan);
 
 					stepLinksFunct();
 					stepImagesFunct();
@@ -101,77 +164,7 @@ export default function Scan() {
 				});
 		}
 		fetchData();
-	}, []);
-
-	const stepLinksFunct = () => {
-		axios.get('/api/v1/tools/scans/' + scan_uuid + '/step_links')
-			.then((response) => {
-				setStepLinks(response.data.response);
-				setStepLinksCount(response.data.count);
-			});
-	}
-
-	const stepImagesFunct = () => {
-		axios.get('/api/v1/tools/scans/' + scan_uuid + '/step_images')
-			.then((response) => {
-				// console.log(response.data);
-				setStepImages(response.data.response);
-				setStepImagesCount(response.data.count);
-			});
-	}
-
-	const stepHeadingsFunct = () => {
-		axios.get('/api/v1/tools/scans/' + scan_uuid + '/step_headings')
-			.then((response) => {
-				// console.log(response.data);
-				setStepHeadings(response.data.response);
-				setStepHeadingsCount(response.data.count);
-			});
-	}
-
-	const stepMetaFunct = () => {
-		axios.get('/api/v1/tools/scans/' + scan_uuid + '/step_meta')
-			.then((response) => {
-				// console.log(response.data);
-				setStepMeta(response.data.response);
-				setStepMetaCount(response.data.count);
-			});
-	}
-
-	const stepRobotsFunct = () => {
-		axios.get('/api/v1/tools/scans/' + scan_uuid + '/step_robots')
-			.then((response) => {
-				// console.log(response.data);
-				setStepRobots(response.data.response);
-			});
-	}
-
-	const stepSitemapFunct = () => {
-		axios.get('/api/v1/tools/scans/' + scan_uuid + '/step_sitemap')
-			.then((response) => {
-				// console.log(response.data);
-				setStepSitemap(response.data.response);
-			});
-	}
-
-	const stepOthersFunct = () => {
-		axios.get('/api/v1/tools/scans/' + scan_uuid + '/step_others')
-			.then((response) => {
-				// console.log(response.data);
-				setStepOthers(response.data.response);
-				setStepOthersCount(response.data.count);
-			});
-	}
-
-	const stepStructuredDataFunct = () => {
-		axios.get('/api/v1/tools/scans/' + scan_uuid + '/step_structured_data')
-			.then((response) => {
-				// console.log(response.data);
-				setStepStructuredData(response.data.response);
-				setStepStructuredDataCount(response.data.count);
-				setIsLoading(false);
-			});
-	}
+	}, [scan_uuid]);
 
 	return (
 		<Layout page="scan" isLoading={isLoading}>
